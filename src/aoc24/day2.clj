@@ -42,9 +42,8 @@
 
 (defn tolerable-safe? [levels]
   (let [bad-levels (bad-levels levels)]
-    (->> bad-levels
-         (map (fn [bad-level] (safe? (remove #(= % bad-level) levels))))
-         (some true?))))
+    (some (fn [bad-level] (safe? (remove #(= % bad-level) levels)))
+          bad-levels)))
 
 (defn tolerable-reports [input]
   (->> input
